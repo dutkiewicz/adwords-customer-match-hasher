@@ -8,7 +8,7 @@ class MainApp(tk.Frame):
     """Main GUI"""
 
     _root_title = 'Google AdWords Customer Match Hasher 0.1'
-    _DIR = os.environ['PWD']
+    _DIR = os.path.dirname(os.path.abspath(__file__))
 
     userinput = None
     hashed_data = None
