@@ -1,11 +1,11 @@
 # core Class for hashing customer data
-from hashlib import sha256
-from collections import Iterable
 import re
+from collections import Iterable
+from hashlib import sha256
+
 
 class HashData():
     """Creates SHA256 sums for iterable prepared for AdWords Customer Match"""
-
 
     def __init__(self, data):
         if not isinstance(data, Iterable) or isinstance(data, str):
@@ -38,12 +38,11 @@ class HashData():
             if not pattern.match(mail):
                 raise ValueError("'{}' doesn't seem to be a valid email!".format(mail))
 
-
     def encrypt(self):
         """Creates generator for hashing self.data with SHA256 algorithm"""
 
         for row in self.data:
             value = HashData.clean(row)
-            value = value.encode('UTF8') # hashlib requires encoding before hashing
+            value = value.encode('UTF8')  # hashlib requires encoding before hashing
 
             yield sha256(value).hexdigest()

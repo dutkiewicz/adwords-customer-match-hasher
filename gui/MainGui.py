@@ -1,6 +1,7 @@
+import os
 import tkinter as tk
 from tkinter import filedialog, messagebox
-import os
+
 from hasher import HashData
 
 
@@ -55,7 +56,6 @@ class MainApp(tk.Frame):
         self.btn_quit['command'] = self.master.destroy
         self.btn_quit.grid(row=4, column=2)
 
-
     def create_error_box(self, message):
         """Display errors for user"""
         messagebox.showerror("Error", message)
@@ -81,12 +81,8 @@ class MainApp(tk.Frame):
             email_list.validate_email()
             self.hashed_data = list(email_list.encrypt())
 
-            self.output.delete('1.0', tk.END) # purge output before writing
+            self.output.delete('1.0', tk.END)  # purge output before writing
             self.output.insert('1.0', '\n'.join(self.hashed_data))
 
         except ValueError as e:
             self.create_error_box(e)
-
-
-
-
