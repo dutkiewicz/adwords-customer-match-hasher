@@ -61,10 +61,16 @@ class MainApp(tk.Frame):
         messagebox.showerror("Error", message)
 
     def save_to_file(self):
-        tk.filedialog.asksaveasfilename(
-            initialdir=self._DIR,
-            title='emails',
-        )
+        filename = tk.filedialog.asksaveasfilename(initialdir=self._DIR, title='emails')
+
+        if self.hashed_data:
+            if filename:
+                with open(filename, 'w', encoding='utf8') as file:
+                    file.write('\n'.join(self.hashed_data))
+            else:
+                self.create_error_box('First choose where to save file!')
+        else:
+            self.create_error_box('No hashed emails to save!')
 
     def hash_input(self):
         """Hash mails from self.input"""
